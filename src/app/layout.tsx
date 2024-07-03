@@ -1,8 +1,13 @@
+import { AppProvider } from "@/context/AppContext";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Figtree } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const figtree = Figtree({
+  subsets: ["latin"],
+  weight: ["400", "700", "300", "500", "900", "600", "800"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <AppProvider>
+        <body className={figtree.className}>
+          {children}
+
+          <Toaster position="top-center" reverseOrder={false} />
+        </body>
+      </AppProvider>
     </html>
   );
 }
